@@ -1,0 +1,13 @@
+.sidebar {
+  width: 60px;
+  // border: 1px solid #ffc42e;
+  background-color: #ffc42e;
+  @media (max-width: 900px) {
+    position: fixed;
+    height: 100vh;
+  }
+  padding-top: 53px;
+  &.open {
+    width: 310px;
+  }
+}
