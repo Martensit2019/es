@@ -4,6 +4,8 @@ const ProductCard = ({ product }) => {
   const { articul, title, category, imgsmall, price } = product
   const [isFav, setIsFav] = useState(false)
 
+  const imgUrl=`https://images.brickset.com/sets/images/${articul}-1.jpg`
+
   const toggleFavorite = () => {
     setIsFav((prev) => !prev)
   }
@@ -13,7 +15,8 @@ const ProductCard = ({ product }) => {
   return (
     <div className="product-card">
       <div className="product-card__img">
-        <img src="./images/21330_box1.jpg" alt="" />
+
+        <img src={imgUrl} alt="" />
       </div>
       <div className="product-card__articul">
         {category} {articul}

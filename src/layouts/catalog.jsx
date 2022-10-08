@@ -6,20 +6,16 @@ import Pagination from '../components/pagination/pagination'
 const Catalog = () => {
   const [products, setProducts] = useState([])
   const [totalProducts, setTotalProducts] = useState(0)
+  const [currentPage, setCurrentPage] = useState(1)
   // const [pageSize, setPageSize] = useState(10)
   const pageSize = 10 // потом будем менять количество отображаемых товаров
-  const countPages = totalProducts / pageSize
 
   useEffect(() => {
-    axios.get('http://localhost:3001/products?_start=0&_limit=10').then((res) => {
+    axios.get(`http://localhost:3001/products?_start=${(currentPage-1)*pageSize}&_limit=${pageSize}`).then((res) => {
       setProducts(res.data)
       setTotalProducts(res.headers['x-total-count'])
     })
-  }, [])
-
-  const handlePageChange = (pageIdx) => {
-    console.log('page', pageIdx)
-  }
+  }, [currentPage, pageSize])
 
   return (
     <div className="catalog-page">
@@ -32,12 +28,13 @@ const Catalog = () => {
               <ProductCard product={product} key={product.id} />
             ))}
           </div>
-          <div>1</div>
-          <div>2</div>
-          <div>3</div>
-          <div>4</div>
-          {countPages}
-          <Pagination itemsCount={totalProducts} pageSize={pageSize} onPageChange={handlePageChange} />
+          <Pagination
+            className="pagination-bar"
+            currentPage={currentPage}
+            totalCount={totalProducts}
+            pageSize={pageSize}
+            onPageChange={(page) => setCurrentPage(page)}
+          />
         </div>
       </div>
     </div>
