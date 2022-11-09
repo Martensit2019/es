@@ -1,0 +1,21 @@
+.breadcrumbs{
+  margin-top: 15px;
+  &__list-item{
+    display: inline-block;
+    padding-right: 16px;
+    margin-right: 16px;
+    position: relative;
+    a{
+      color: #ccc;
+    }
+    &::after{
+      content:">";
+      position: absolute;
+      right: 0;
+      background-image: url();
+    }
+    &:last-child::after{
+      display: none;
+    }
+  }
+}

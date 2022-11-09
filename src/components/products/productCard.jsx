@@ -1,23 +1,32 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import translit from '../../services/translit'
 
 const ProductCard = ({ product }) => {
-  const { articul, title, category, imgsmall, price } = product
+  const { slug, articul, title, category, imgsmall, price } = product
   const [isFav, setIsFav] = useState(false)
+  const [isCompare, setIsCompare] = useState(false)
 
-  const imgUrl=`https://images.brickset.com/sets/images/${articul}-1.jpg`
+  const imgUrl = `http://m977726h.beget.tech/images/eshop/product/${articul}-1.jpg`
 
-  const toggleFavorite = () => {
+  const toggleFavorite = (e) => {
+    e.preventDefault()
     setIsFav((prev) => !prev)
   }
-
+  const toggleCompare = (e) => {
+    e.preventDefault()
+    setIsCompare((prev) => !prev)
+  }
 
 
   return (
     <div className="product-card">
-      <div className="product-card__img">
+      <Link to={`/product/${slug}`}>
+        <div className="product-card__img">
+          <img src={imgUrl} alt="" />
+        </div>
+      </Link>
 
-        <img src={imgUrl} alt="" />
-      </div>
       <div className="product-card__articul">
         {category} {articul}
       </div>
@@ -31,6 +40,9 @@ const ProductCard = ({ product }) => {
           </button>
           <button className="product-card__favorite" onClick={toggleFavorite}>
             <img src={'./images/icons/favourite' + (isFav ? '-card' : '') + '.svg'} alt="" />
+          </button>
+          <button className="product-card__compare" onClick={toggleCompare}>
+            <img src={'./images/icons/compare' + (isCompare ? '-card' : '') + '.svg'} alt="" />
           </button>
         </div>
         <button className="product-card__basket">В корзину</button>
